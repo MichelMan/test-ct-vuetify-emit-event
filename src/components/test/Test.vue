@@ -8,7 +8,7 @@
 export default {
   methods: {
     handleClick() {
-      this.$emit("click", "HELLO TOTO");
+      this.$emit("click", "HELLO WORLD");
     },
   },
 };

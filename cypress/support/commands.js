@@ -31,7 +31,7 @@ import { VApp } from 'vuetify/lib/components/VApp'
 
 Vue.use(Vuetify)
 
-
+// Override default command mount to use it with Vuetify
 Cypress.Commands.add("mount", (component, args) => {
   return mount(
     { render: (h) => h(VApp, [h(component, args)]) },
@@ -39,6 +39,8 @@ Cypress.Commands.add("mount", (component, args) => {
   );
 });
 
+// Also add a command to use easily vue-test-utils as describe by Jessica Sachs
+// https://github.com/JessicaSachs/cypress-loves-vite/blob/develop/cypress/support/index.js#L19
 Cypress.Commands.add("vue", () => {
   return cy.wrap(Cypress.vueWrapper);
 });
