@@ -1,4 +1,4 @@
-# vue2-cli4-webpack4
+# test-ct-vuetify-emit-event
 
 ## Project setup
 ```
@@ -22,4 +22,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-# test-ct-vuetify-emit-event
