@@ -32,9 +32,6 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 
-
-Vue.use(Vuetify)
-
 // Override default command mount to use it with Vuetify
 Cypress.Commands.add("mount", (component, args = {}) => {
   const { listeners, ...props } = args
