@@ -26,18 +26,31 @@
 
 import { mount } from "cypress/vue2";
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib/framework'
 import { VApp } from 'vuetify/lib/components/VApp'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify)
 
 // Override default command mount to use it with Vuetify
-Cypress.Commands.add("mount", (component, args) => {
-  return mount(
-    { render: (h) => h(VApp, [h(component, args)]) },
-    { vuetify: new Vuetify({}), ...args }
-  );
-});
+Cypress.Commands.add("mount", (component, args = {}) => {
+  const { listeners, ...props } = args
+
+  // pass event handlers to child component via `on` prop
+  const on = Object.entries(listeners || {}).reduce((acc, [event, handler]) => {
+    acc[event] = handler
+    return acc
+  }, {})
+
+  return mount({
+    vuetify: new Vuetify({}),
+    render: h => h(
+      VApp, [
+        h(component, { ...props, on })
+      ]
+    )
+  })
+})
 
 // Also add a command to use easily vue-test-utils as describe by Jessica Sachs
 // https://github.com/JessicaSachs/cypress-loves-vite/blob/develop/cypress/support/index.js#L19
